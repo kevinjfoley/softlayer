@@ -4,10 +4,14 @@ ssh = paramiko.SSHClient()
 ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
 
 
-def run_cmd(ip, cmd, user=None):
+def run_cmd(ip, cmd, user=None, profile=None):
 
     if user is None:
         user = 'root'
+    if profile is None:
+        profile = "source ~/.bash_profile;"
+
+    print(cmd)
     ssh.connect(ip, username=user,
                 key_filename="/home/kevin/.ssh/softlayer")
     return ssh.exec_command(cmd)
